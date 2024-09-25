@@ -30,10 +30,10 @@ This project demonstrates an image captioning application utilizing the `Salesfo
 
 This project demonstrates a data analysis application that leverages `Plotly` to create interactive data visualizations. The application can render both 2D and 3D plots, allowing users to explore datasets in a dynamic and visually engaging way.
 
-### Presentation
+### Presentation of 2D chart
 ![Chatbot Presentation 2D](md/std2.jpg)
 
-### Presentation
+### Presentation of 3D charts
 ![Chatbot Presentation 3D](md/std3.jpg)
 
 
@@ -48,8 +48,8 @@ This project demonstrates a chatbot utilizing the `google/flan-t5-base` model fo
 
 This project demonstrates a data analysis application that leverages `Plotly` to create interactive data visualizations. The application can render both 2D and 3D plots, allowing users to explore datasets in a dynamic and visually engaging way.
 
-### Presentation
+### Presentation of 2D chart
 ![Chatbot Presentation 2D](md/pni2.jpg)
 
-### Presentation
+### Presentation of 3D charts
 ![Chatbot Presentation 3D](md/pne2.jpg)
