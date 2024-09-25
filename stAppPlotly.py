@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import stAppPlotly.express as px
+import plotly.express as px
 
 def load_iris_data():
     return px.data.iris()
