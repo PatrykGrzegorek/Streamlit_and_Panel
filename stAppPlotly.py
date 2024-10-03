@@ -10,7 +10,6 @@ def load_election_data():
 
 st.title('Data Analysis Application')
 
-# Section selection
 section = st.sidebar.selectbox("Select Analysis Section", ["Iris Analysis", "Election Analysis"])
 
 if section == "Iris Analysis":

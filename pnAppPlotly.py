@@ -2,7 +2,6 @@ import pandas as pd
 import plotly.express as px
 import panel as pn
 
-# Initialize Panel extensions
 pn.extension('plotly', 'tabulator')
 
 def load_iris_data():
@@ -11,7 +10,6 @@ def load_iris_data():
 def load_election_data():
     return px.data.election()
 
-# Create the Iris Analysis section
 def create_iris_section():
     df = load_iris_data()
 
@@ -26,10 +24,10 @@ def create_iris_section():
         df,
         height=300,
         sizing_mode='stretch_width',
-        theme='simple',  # You can choose other themes like 'midnight' or 'modern'
-        layout='fit_columns'  # Adjusts columns to fit the table width
+        theme='simple',
+        layout='fit_columns'
     )
-    data_pane.visible = False  # Initially hide the table
+    data_pane.visible = False
 
     @pn.depends(x_axis.param.value, y_axis.param.value, watch=True)
     def update_iris_plot(x, y):
@@ -40,7 +38,6 @@ def create_iris_section():
     def update_data_pane(show_data):
         data_pane.visible = show_data
 
-    # Initialize the plot
     update_iris_plot(x_axis.value, y_axis.value)
 
     iris_section = pn.Column(
@@ -53,33 +50,30 @@ def create_iris_section():
         plot_pane,
         data_pane,
         sizing_mode='stretch_width',
-        visible=False  # Initially hidden
+        visible=False
     )
 
     return iris_section
 
-# Create the Election Analysis section
 def create_election_section():
     df = load_election_data()
 
     checkbox = pn.widgets.Checkbox(name='Show raw data (Election)')
 
-    # Create the plot and table
     plot_pane = pn.pane.Plotly(sizing_mode='stretch_width', height=600)
     data_pane = pn.widgets.Tabulator(
         df,
         height=300,
         sizing_mode='stretch_width',
-        theme='simple',  # You can choose other themes
-        layout='fit_data_fill'  # Adjusts columns based on data
+        theme='simple',
+        layout='fit_data_fill'
     )
-    data_pane.visible = False  # Initially hide the table
+    data_pane.visible = False
 
     @pn.depends(checkbox.param.value, watch=True)
     def update_data_pane(show_data):
         data_pane.visible = show_data
 
-    # Initialize the plot
     fig = px.scatter_3d(
         df, x="Joly", y="Coderre", z="Bergeron",
         color="winner", size="total", hover_name="district",
@@ -100,11 +94,9 @@ def create_election_section():
 
     return election_section
 
-# Create both sections
 iris_section = create_iris_section()
 election_section = create_election_section()
 
-# Main layout
 section_selector = pn.widgets.RadioButtonGroup(
     name='Select Analysis Section',
     options=['Iris Analysis', 'Election Analysis'],
@@ -119,21 +111,16 @@ def update_section(event):
         iris_section.visible = False
         election_section.visible = True
 
-# Set initial visibility
 iris_section.visible = True
 election_section.visible = False
 
-# Watch for changes in the section selector
 section_selector.param.watch(update_section, 'value')
 
-# Create the template
 template = pn.template.MaterialTemplate(title='Data Analysis Application')
 
-# Add components to the template
 template.sidebar.append(pn.pane.Markdown("# Menu"))
 template.sidebar.append(section_selector)
 template.main.append(iris_section)
 template.main.append(election_section)
 
-# Serve the application
 template.servable()
